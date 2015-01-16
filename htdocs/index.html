@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+  <title>Test Page</title>
+  <script src="./taffy-min.js"></script>
+  <script src="./prizedb.js"></script>
+  <script src="./prizelogic.js"></script>
+</head>
+<body>
+<div>
+
+<!-- List categories -->
+<h1>Category list</h1>
+<script>
+var list = prizedb().order('Cat1').distinct('Cat1');
+prizeList(list);
+</script>
+
+
+<!-- One record by PrizeID -->
+<h1>Look up one item</h1>
+<script>
+var list = prizedb({PrizeID:'20844597690'}).get();
+prizeTable(list, 400); //large image
+</script>
+
+
+<!-- All items in one category -->
+<h1>Items in category Tools/Auto</h1>
+<script>
+var list = prizedb({Cat1:'Tools/Auto'}).order('Title').select('Title');
+prizeList(list);
+</script>
+
+<!-- All items in point range -->
+<h1>Items between 200 and 220 points sorted by point value</h1>
+<script>
+var list = prizedb({Points:{'>=':300, '<=':500}}).order('Points').get();
+prizeTable(list);
+</script>
+
+
+<!-- All items in one sub-category -->
+<h1>Items in sub-category Cutlery - Steak Knives</h1>
+<script>
+var list = prizedb({Cat1:'Cutlery', Cat2:'Steak Knives'}).order('Title').get();
+prizeTable(list);
+</script>
+
+
+
+</div>
+</body>
+</html>
